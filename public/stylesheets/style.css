@@ -3,26 +3,27 @@
 }
 
 body, html {
+  background-color: #060012;
   height: 100%;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
-  color: #333;
+  color: #d7d5db;
 }
 
 a {
   text-decoration: none;
-  color: #225ca3;
+  color: #ff2c21;
   font-weight: bold;
   transition: color .1s;
 }
 
 a:hover {
-  color: #3486eb;
+  color: #962a23;
 }
 
 button {
-  background-color: #225ca3;
+  background-color: #ff2c21;
   border: 0;
   padding: 1%;
   color: white;
@@ -33,7 +34,11 @@ button {
 }
 
 button:hover {
-  background-color: #3486eb;
+  background-color: #962a23;
+}
+
+ol li {
+  list-style-type: none;
 }
 
 .post-list {
@@ -44,12 +49,12 @@ button:hover {
 textarea, input {
   padding: .5%;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #7d7d7d;
 }
 
 textarea:focus, input:focus {
   outline: none;
-  border: 1px solid #3486eb;
+  border: 1px solid #962a23;
 }
 
 textarea {
@@ -75,7 +80,8 @@ form label {
 }
 
 header {
-  border-bottom: 1px solid #ccc;
+  background-color: #201b24;
+  border-bottom: 1px solid #000000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,7 +103,7 @@ main {
   padding: 0;
   cursor: pointer;
   text-decoration: none;
-  color: #225ca3;
+  color: #962a23;
   font-size: 100%;
   font-weight: bold;
   transition: color .1s;
@@ -106,7 +112,7 @@ main {
 
 .btn-no-style:hover {
   background: none;
-  color: #3486eb;
+  color: #962a23;
 }
 
 .delete-post-btn {
@@ -120,9 +126,16 @@ main {
 .post {
   margin-bottom: 2%;
   line-height: 150%;
+  border: #201b24 2px solid;
 }
 
-.post .title span {
+.title {
+  background-color: #201b24;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post .title .user-info {
   font-style: italic;
   font-size: 90%;
   color: #7d7d7d;
@@ -131,15 +144,6 @@ main {
 .edit-link {
   display: block;
   margin: -1.5% 0 2% 0;
-}
-
-.upvote-btn {
-  background-color: #197d0f;
-  transition: background-color .1s;
-}
-
-.upvote-btn:hover {
-  background-color: #1f9c13;
 }
 
 .comment-form {
@@ -152,7 +156,7 @@ main {
 }
 
 .comment:nth-child(odd) {
-  background-color: #fff5eb;
+  background-color: #201b24;
 }
 
 .comment .meta {
@@ -169,8 +173,15 @@ main {
   margin-bottom: 5%;
 }
 
+#post-url {
+  height: 150px !important;
+  width: 400px;
+}
+
 footer {
-  border-top: 1px solid #ccc;
+  background-color: #201b24;
+  color: #000000;
+  border-top: 1px solid #000000;
   display: flex;
   justify-content: center;
   padding: 1%;

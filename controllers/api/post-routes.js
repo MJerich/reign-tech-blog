@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Vote, Comment } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
@@ -9,10 +9,9 @@ router.get('/', (req, res) => {
          // Query configuration
         attributes: [
             'id',
-            'post_url',
+            'content',
             'title',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         order: [['created_at', 'DESC']],
         include: [
@@ -37,26 +36,12 @@ router.get('/', (req, res) => {
     });
 });
 
-// PUT /api/posts/upvote
-router.put('/upvote', (req, res) => {
-    // make sure the session exists first
-    if (req.session) {
-        // pass session id along with all destructured properties on req.body
-        Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
-            .then(updatedVoteData => res.json(updatedVoteData))
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
-    }
-});
-
 // make a new post
 router.post('/', withAuth, (req, res) => {
-    // expects {title: 'string', post_url: 'https://url.com', user_id: NUMBER}
+    // expects {title: 'string', content: 'content here', user_id: NUMBER}
     Post.create({
         title: req.body.title,
-        post_url: req.body.post_url,
+        content: req.body.content,
         user_id: req.session.user_id
     })
     .then(dbPostData => res.json(dbPostData))
@@ -74,10 +59,9 @@ router.get('/:id', (req, res) => {
         },
             attributes: [
             'id',
-            'post_url',
+            'content',
             'title',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         include: [
             {
